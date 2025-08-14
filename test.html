@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dit Navn - Bygningskonstruktør</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #0ea5e9;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-text .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-stats {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            min-width: 200px;
+        }
+
+        .stat {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .expertise-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .expertise-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .expertise-icon {
+            font-size: 1.5rem;
+        }
+
+        .expertise-text {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--bg-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            height: 250px;
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-muted);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(37, 99, 235, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay-text {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-detail {
+            color: var(--text-secondary);
+        }
+
+        .project-detail strong {
+            color: var(--text-primary);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Project Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-white);
+            border-radius: 12px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            margin: 2rem;
+            width: 100%;
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-light);
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-gallery {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .modal-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .spec-item {
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-value {
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: var(--bg-white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+
+            .modal-specs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Dit Navn</div>
+            <ul class="nav-links">
+                <li><a href="#home">Hjem</a></li>
+                <li><a href="#about">Om Mig</a></li>
+                <li><a href="#projects">Projekter</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Dit Navn</h1>
+                    <p class="subtitle">Bygningskonstruktør</p>
+                    <p class="description">
+                        Med over 10 års erfaring inden for bygningskonstruktion skaber jeg innovative 
+                        og bæredygtige løsninger til moderne byggeprojekter. Fra enfamiliehuse til 
+                        større erhvervsbyggerier.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">Se Mine Projekter</a>
+                        <a href="#contact" class="btn btn-outline">Kontakt Mig</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&h=400&fit=crop" alt="Bygningsprojekt">
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Gennemførte Projekter</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">År Erfaring</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Tilfredse Kunder</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about fade-in">
+        <div class="container">
+            <h2 class="section-title">Om Mig</h2>
+            <p class="section-subtitle">Erfaren bygningskonstruktør med passion for innovative løsninger</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Som autoriseret bygningskonstruktør har jeg dedikeret min karriere til at skabe 
+                        solide og æstetiske bygningsløsninger. Min tilgang kombinerer teknisk ekspertise 
+                        med kreativ problemløsning for at levere projekter, der overgår forventningerne.
+                    </p>
+                    <p>
+                        Jeg specialiserer mig i bæredygtig byggeri og moderne konstruktionsteknikker, 
+                        og arbejder tæt sammen med arkitekter, ingeniører og entreprenører for at 
+                        sikre optimal udførelse af hvert projekt.
+                    </p>
+                    <p>
+                        Min erfaring spænder fra private villaer til større erhvervsbygninger, 
+                        og jeg har en særlig interesse for energioptimering og miljøvenlige materialer.
+                    </p>
+                </div>
+                <div class="expertise-list">
+                    <div class="expertise-item">
+                        <div class="expertise-icon">🏗️</div>
+                        <div class="expertise-text">Konstruktionsberegninger</div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon">📐</div>
+                        <div class="expertise-text">Tekniske Tegninger</div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon">🌱</div>
+                        <div class="expertise-text">Bæredygtige Løsninger</div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon">🔍</div>
+                        <div class="expertise-text">Byggeteknisk Rådgivning</div>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-icon">📋</div>
+                        <div class="expertise-text">Projektledelse</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects fade-in">
+        <div class="container">
+            <h2 class="section-title">Mine Projekter</h2>
+            <p class="section-subtitle">Udvalgte projekter der viser min erfaring og ekspertise</p>
+            <div class="projects-grid">
+                <div class="project-card" onclick="openModal('project1')">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=400&h=250&fit=crop" alt="Moderne Enfamiliehus">
+                        <div class="project-overlay">
+                            <div class="project-overlay-text">Se Detaljer</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Moderne Enfamiliehus</h3>
+                        <p class="project-description">
+                            Et energioptimeret enfamiliehus med fokus på bæredygtige materialer 
+                            og innovative konstruktionsløsninger.
+                        </p>
+                        <div class="project-details">
+                            <div class="project-detail"><strong>År:</strong> 2024</div>
+                            <div class="project-detail"><strong>Størrelse:</strong> 180 m²</div>
+                            <div class="project-detail"><strong>Energiklasse:</strong> A+</div>
+                            <div class="project-detail"><strong>Varighed:</strong> 6 måneder</div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Enfamiliehus</span>
+                            <span class="project-tag">Energioptimering</span>
+                            <span class="project-tag">Bæredygtigt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('project2')">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop" alt="Kontorbyggeri">
+                        <div class="project-overlay">
+                            <div class="project-overlay-text">Se Detaljer</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Moderne Kontorbyggeri</h3>
+                        <p class="project-description">
+                            Fleksibel kontorbyggeri med store åbne rum og innovative 
+                            strukturelle løsninger for maksimal funktionalitet.
+                        </p>
+                        <div class="project-details">
+                            <div class="project-detail"><strong>År:</strong> 2023</div>
+                            <div class="project-detail"><strong>Størrelse:</strong> 1200 m²</div>
+                            <div class="project-detail"><strong>Etager:</strong> 3</div>
+                            <div class="project-detail"><strong>Varighed:</strong> 12 måneder</div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Kontorbyggeri</span>
+                            <span class="project-tag">Stålkonstruktion</span>
+                            <span class="project-tag">Fleksibel Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="project-card" onclick="openModal('project2')">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop" alt="Kontorbyggeri">
+                        <div class="project-overlay">
+                            <div class="project-overlay-text">Se Detaljer</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Moderne Kontorbyggeri</h3>
+                        <p class="project-description">
+                            Fleksibel kontorbyggeri med store åbne rum og innovative 
+                            strukturelle løsninger for maksimal funktionalitet.
+                        </p>
+                        <div class="project-details">
+                            <div class="project-detail"><strong>År:</strong> 2023</div>
+                            <div class="project-detail"><strong>Størrelse:</strong> 1200 m²</div>
+                            <div class="project-detail"><strong>Etager:</strong> 3</div>
+                            <div class="project-detail"><strong>Varighed:</strong> 12 måneder</div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Kontorbyggeri</span>
+                            <span class="project-tag">Stålkonstruktion</span>
+                            <span class="project-tag">Fleksibel Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('project3')">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=400&h=250&fit=crop" alt="Renovering af Historisk Bygning">
+                        <div class="project-overlay">
+                            <div class="project-overlay-text">Se Detaljer</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Renovering af Historisk Bygning</h3>
+                        <p class="project-description">
+                            Omfattende renovering af en historisk bygning med bevarelse 
+                            af original karakter og moderne funktionalitet.
+                        </p>
+                        <div class="project-details">
+                            <div class="project-detail"><strong>År:</strong> 2023</div>
+                            <div class="project-detail"><strong>Størrelse:</strong> 800 m²</div>
+                            <div class="project-detail"><strong>Byggeår:</strong> 1892</div>
+                            <div class="project-detail"><strong>Varighed:</strong> 18 måneder</div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Renovering</span>
+                            <span class="project-tag">Historisk</span>
+                            <span class="project-tag">Bevarelsesværdig</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact fade-in">
+        <div class="container">
+            <h2 class="section-title">Kontakt Mig</h2>
+            <p class="section-subtitle">Lad os tale om dit næste byggeprojekt</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Få et uforpligtende tilbud</h3>
+                    <p>
+                        Jeg tilbyder professionel rådgivning og konstruktive løsninger til 
+                        alle typer byggeprojekter. Kontakt mig for at diskutere dine behov.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>din.email@example.com</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>+45 12 34 56 78</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>Odense, Danmark</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div>CVR: 12345678</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label class="form-label">Navn *</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Telefon</label>
+                        <input type="tel" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Projekttype</label>
+                        <select class="form-control">
+                            <option>Vælg projekttype</option>
+                            <option>Enfamiliehus</option>
+                            <option>Erhvervsbyggeri</option>
+                            <option>Renovering</option>
+                            <option>Tilbygning</option>
+                            <option>Rådgivning</option>
+                            <option>Andet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Besked *</label>
+                        <textarea class="form-control" placeholder="Fortæl om dit projekt og dine behov..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Besked</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dit Navn - Bygningskonstruktør | CVR: 12345678 | Tlf: +45 12 34 56 78</p>
+        </div>
+    </footer>
+
+    <!-- Project Modals -->
+    <div class="modal" id="project1Modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('project1')">&times;</button>
+                <h2 class="modal-title">Moderne Enfamiliehus</h2>
+                <p class="modal-subtitle">Energioptimeret bolig med bæredygtige løsninger</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&h=400&fit=crop" alt="Facade" class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=400&fit=crop" alt="Interiør" class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&h=400&fit=crop" alt="Køkken" class="modal-image">
+                </div>
+                
+                <div class="modal-text">
+                    <h3>Projektbeskrivelse</h3>
+                    <p>
+                        Dette moderne enfamiliehus er designet med fokus på energieffektivitet og bæredygtige materialer. 
+                        Huset opnår energiklasse A+ gennem innovative isoleringsløsninger og avancerede varmesystemer.
+                    </p>
+                    <p>
+                        Konstruktionen kombinerer traditionelle byggeteknikker med moderne materialer som 
+                        certificeret træ og lavenergi-vinduer. Det åbne grundplan maksimerer naturligt lys 
+                        og skaber en optimal forbindelse mellem inde og ude.
+                    </p>
+                    <p>
+                        Specielle udfordringer i dette projekt inkluderede optimering af varmeisolering og 
+                        implementering af et geotermisk varmesystem, som reducerer husets CO2-aftryk betydeligt.
+                    </p>
+                </div>
+
+                <div class="modal-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Samlet areal</div>
+                        <div class="spec-value">180 m²</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Energiklasse</div>
+                        <div class="spec-value">A+ (15 kWh/m²/år)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Konstruktion</div>
+                        <div class="spec-value">Træskelet med isolering</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Varmeanlæg</div>
+                        <div class="spec-value">Geotermisk varmepumpe</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Tagkonstruktion</div>
+                        <div class="spec-value">Saddeltag med soltag</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Projektvarighed</div>
+                        <div class="spec-value">6 måneder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="project2Modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('project2')">&times;</button>
+                <h2 class="modal-title">Moderne Kontorbyggeri</h2>
+                <p class="modal-subtitle">Fleksibel erhvervsbyggeri med innovative løsninger</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop" alt="Facade" class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=400&fit=crop" alt="Kontorlandskab" class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&h=400&fit=crop" alt="Møderum" class="modal-image">
+                </div>
+                
+                <div class="modal-text">
+                    <h3>Projektbeskrivelse</h3>
+                    <p>
+                        Denne moderne kontorbygning på 3 etager er designet til maksimal fleksibilitet og funktionalitet. 
+                        Bygningen kan nemt omkonfigureres til forskellige lejemål og behov.
+                    </p>
+                    <p>
+                        Stålkonstruktionen muliggør store spænd uden søjler, hvilket giver optimale forhold for 
+                        åbne kontorlandskaber. Facaden kombinerer glas og metal i et moderne, tidløst design.
+                    </p>
+                    <p>
+                        Særlige fokusområder inkluderede akustiske løsninger, energieffektivt HVAC-system og 
+                        fleksible installationer der kan tilpasses fremtidige behov.
+                    </p>
+                </div>
+
+                <div class="modal-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Samlet areal</div>
+                        <div class="spec-value">1.200 m²</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Antal etager</div>
+                        <div class="spec-value">3 etager</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Konstruktion</div>
+                        <div class="spec-value">Stålskelet</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Facademateriale</div>
+                        <div class="spec-value">Glas og aluminium</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Fleksibilitet</div>
+                        <div class="spec-value">Modulopbygget design</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Projektvarighed</div>
+                        <div class="spec-value">12 måneder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="project3Modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('project3')">&times;</button>
+                <h2 class="modal-title">Renovering af Historisk Bygning</h2>
+                <p class="modal-subtitle">Bevarende renovering med moderne funktionalitet</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=800&h=400&fit=crop" alt="Facade efter" class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=400&fit=crop" alt="Interiør" class="modal-image">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=400&fit=crop" alt="Detalje" class="modal-image">
+                </div>
+                
+                <div class="modal-text">
+                    <h3>Projektbeskrivelse</h3>
+                    <p>
+                        Denne omfattende renovering af en historisk bygning fra 1892 kombinerer bevarelse 
+                        af original arkitektur med moderne komfort og funktionalitet.
+                    </p>
+                    <p>
+                        Projektet krævede omfattende strukturelle analyser og specialiserede teknikker 
+                        for at bevare bygningens historiske karakter, samtidig med at den opfylder 
+                        moderne byggekrav og energistandarder.
+                    </p>
+                    <p>
+                        Vi arbejdede tæt sammen med kulturhistoriske rådgivere for at sikre, at alle 
+                        ændringer var i overensstemmelse med bevaringsbestemmelserne.
+                    </p>
+                </div>
+
+                <div class="modal-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Samlet areal</div>
+                        <div class="spec-value">800 m²</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Byggeår (original)</div>
+                        <div class="spec-value">1892</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Renoveringstype</div>
+                        <div class="spec-value">Bevarende renovering</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Nye energiklasse</div>
+                        <div class="spec-value">C (forbedret fra G)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Særlige udfordringer</div>
+                        <div class="spec-value">Strukturel forstærkning</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Projektvarighed</div>
+                        <div class="spec-value">18 måneder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Modal functionality
+        function openModal(projectId) {
+            const modal = document.getElementById(projectId + 'Modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(projectId) {
+            const modal = document.getElementById(projectId + 'Modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Tak for din henvendelse! Jeg vender tilbage hurtigst muligt.');
+            this.reset();
+        });
+
+        // Image gallery in modals
+        document.querySelectorAll('.modal-image').forEach(img => {
+            img.addEventListener('click', function() {
+                // Simple lightbox effect - you could expand this
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.9);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 2000;
+                    cursor: pointer;
+                `;
+                
+                const enlargedImg = document.createElement('img');
+                enlargedImg.src = this.src;
+                enlargedImg.style.cssText = `
+                    max-width: 90%;
+                    max-height: 90%;
+                    border-radius: 8px;
+                `;
+                
+                overlay.appendChild(enlargedImg);
+                document.body.appendChild(overlay);
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(overlay);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
